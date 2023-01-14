@@ -11,12 +11,15 @@ namespace Szilveszter_Levente_Proiect.Models
         public int ID { get; set; }
 
         [Required, StringLength(150, MinimumLength = 4)]
-        [Display(Name = "Recipient's Address")]
+        [Display(Name = "Recipient Data")]
         public string Recipient { get; set; }
 
-        [Required, StringLength(150, MinimumLength = 4)]
-        [Display(Name = "Sender's Address")]
-        public string Sender { get; set; }
+        //[Required, StringLength(150, MinimumLength = 4)]
+        //[Display(Name = "Sender Data")]
+        //public string Sender { get; set; }
+
+        public int SenderID { get; set; }
+        public Sender Sender { get; set; }
 
         [Range(1, 400)]
         [Column(TypeName = "decimal(6, 2)")]

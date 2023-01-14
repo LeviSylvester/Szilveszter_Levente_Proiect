@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model Szilveszter_Levente_Proiect.Pages.Callers.IndexModel
 
 @{
@@ -20,17 +20,55 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Caller) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CallerName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.CallerData.Callers)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.CallerID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CallerName)
+                </td>
+
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (Model.CallerData.Shipments != null)
+{
+    <h3>Shipments booked by selected caller</h3>
+    <table class="table">
+
+        @foreach (var item in Model.CallerData.Callers)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.CallerID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+
+                <td>
+                    @{
+                        foreach (var s in item.Shipments)
+                        {
+
+                            @s.Recipient @: @s.Sender.FullName
+
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

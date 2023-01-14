@@ -14,5 +14,11 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #333333; /* dark gray */
+    color: #FFFFFF; /* white text*/
+    background-image: url("/images/bicycleCourierDarkGreyBackground.JPG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

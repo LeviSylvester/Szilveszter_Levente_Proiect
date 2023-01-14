@@ -14,14 +14,15 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Shipment.Recipient" class="control-label"></label>
+                <label asp-for="Shipment.Recipient" class="control-label">Recipient Data</label>
                 <input asp-for="Shipment.Recipient" class="form-control" />
                 <span asp-validation-for="Shipment.Recipient" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Shipment.Sender" class="control-label"></label>
-                <input asp-for="Shipment.Sender" class="form-control" />
-                <span asp-validation-for="Shipment.Sender" class="text-danger"></span>
+                <label asp-for="Shipment.SenderID" class="control-label">Sender Data</label>
+                <select asp-for="Shipment.SenderID" class="form-control" asp-items="ViewBag.SenderID">
+                </select>
+                <span asp-validation-for="Shipment.SenderID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Shipment.Price" class="control-label"></label>
@@ -34,7 +35,7 @@
                 <span asp-validation-for="Shipment.BookingDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Shipment.CallerID" class="control-label">Caller Name</label>
+                <label asp-for="Shipment.CallerID" class="control-label">Caller Data</label>
                 <select asp-for="Shipment.CallerID" class="form-control" asp-items="ViewBag.CallerID">
                 </select>
                 <span asp-validation-for="Shipment.CallerID" class="text-danger"></span>
