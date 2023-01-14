@@ -12,8 +12,8 @@ using Szilveszter_Levente_Proiect.Data;
 namespace Szilveszter_Levente_Proiect.Migrations
 {
     [DbContext(typeof(Szilveszter_Levente_ProiectContext))]
-    [Migration("20230113070415_ShipmentCategories")]
-    partial class ShipmentCategories
+    [Migration("20230113193713_selectCategoriesShipmentDataValidationsDB")]
+    partial class selectCategoriesShipmentDataValidationsDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,11 +77,13 @@ namespace Szilveszter_Levente_Proiect.Migrations
 
                     b.Property<string>("Recipient")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Sender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("ID");
 

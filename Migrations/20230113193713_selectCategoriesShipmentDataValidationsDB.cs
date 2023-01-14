@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Szilveszter_Levente_Proiect.Migrations
 {
-    public partial class ShipmentCategories : Migration
+    public partial class selectCategoriesShipmentDataValidationsDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,8 +41,8 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Recipient = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Recipient = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Sender = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     BookingDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CallerID = table.Column<int>(type: "int", nullable: false)

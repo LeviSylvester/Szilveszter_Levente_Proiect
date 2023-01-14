@@ -1,8 +1,8 @@
-﻿@page "/"
+﻿@page "/{id:int?}"
 @model Szilveszter_Levente_Proiect.Pages.Shipments.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shipments";
 }
 
 <h1>Index</h1>
@@ -28,12 +28,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment[0].ShipmentCategories)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Shipment) {
-        <tr>
+@foreach (var item in Model.ShipmentD.Shipments) 
+{
+
+    string selectedRow = "";
+            if (item.ID == Model.ShipmentID)
+            {
+                selectedRow = "table-success";
+            }
+
+        <tr class="@selectedRow">
+        
             <td>
                 @Html.DisplayFor(modelItem => item.Recipient)
             </td>
@@ -49,6 +61,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Caller.CallerName)
             </td>
+            <td>
+                    @{
+                        foreach (var category in item.ShipmentCategories)
+                        {
+                            @category.Category.ID @: @category.Category.CategoryName <br />
+                        }
+                    }
+            </td>
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
