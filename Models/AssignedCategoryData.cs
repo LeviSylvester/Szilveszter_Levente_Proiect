@@ -7,3 +7,4 @@
         public bool Assigned { get; set; }
     }
 }
+

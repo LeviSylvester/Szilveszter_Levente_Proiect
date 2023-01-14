@@ -22,4 +22,5 @@ namespace Szilveszter_Levente_Proiect.Data
 
         public DbSet<Szilveszter_Levente_Proiect.Models.Sender> Sender { get; set; }
     }
+
 }

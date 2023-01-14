@@ -8,3 +8,4 @@ namespace Szilveszter_Levente_Proiect.Models.ViewModels
         public IEnumerable<Shipment> Shipments { get; set; }
     }
 }
+

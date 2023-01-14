@@ -24,3 +24,4 @@ namespace Szilveszter_Levente_Proiect.Models
 
     }
 }
+

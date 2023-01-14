@@ -7,3 +7,4 @@
         public IEnumerable<ShipmentCategory> ShipmentCategories { get; set; }
     }
 }
+

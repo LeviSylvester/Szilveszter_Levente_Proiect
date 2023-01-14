@@ -201,5 +201,7 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 });
 #pragma warning restore 612, 618
         }
+
     }
 }
+

@@ -127,6 +127,7 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 column: "ShipmentID");
         }
 
+
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

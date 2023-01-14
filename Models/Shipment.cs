@@ -34,3 +34,4 @@ namespace Szilveszter_Levente_Proiect.Models
         public ICollection<ShipmentCategory> ShipmentCategories { get; set; }
     }
 }
+

@@ -6,3 +6,4 @@
         public IEnumerable<Shipment> Shipments { get; set; }
     }
 }
+

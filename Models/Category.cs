@@ -7,3 +7,4 @@
         public ICollection<ShipmentCategory>? ShipmentCategories { get; set; }
     }
 }
+
