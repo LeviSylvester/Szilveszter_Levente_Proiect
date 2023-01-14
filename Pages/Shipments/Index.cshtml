@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Recipient)
+                @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment[0].Recipient)
+            </th>            
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment[0].ShipmentCategories)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].BookingDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].ShipmentCategories)
             </th>
             <th></th>
         </tr>
@@ -45,30 +45,29 @@
             }
 
         <tr class="@selectedRow">
-        
+            <td>
+                @Html.DisplayFor(modelItem => item.Caller.CallerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Recipient)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender)
+                @{
+                    foreach (var category in item.ShipmentCategories)
+                    {
+                        @category.Category.ID @: @category.Category.CategoryName <br />
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookingDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caller.CallerName)
-            </td>
-            <td>
-                    @{
-                        foreach (var category in item.ShipmentCategories)
-                        {
-                            @category.Category.ID @: @category.Category.CategoryName <br />
-                        }
-                    }
-            </td>
+            </td>            
 
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

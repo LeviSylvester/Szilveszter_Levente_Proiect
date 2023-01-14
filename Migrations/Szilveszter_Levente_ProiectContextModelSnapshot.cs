@@ -56,6 +56,35 @@ namespace Szilveszter_Levente_Proiect.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.Sender", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Sender");
+                });
+
             modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.Shipment", b =>
                 {
                     b.Property<int>("ID")
@@ -78,14 +107,14 @@ namespace Szilveszter_Levente_Proiect.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("Sender")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.Property<int>("SenderID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CallerID");
+
+                    b.HasIndex("SenderID");
 
                     b.ToTable("Shipment");
                 });
@@ -121,7 +150,15 @@ namespace Szilveszter_Levente_Proiect.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Szilveszter_Levente_Proiect.Models.Sender", "Sender")
+                        .WithMany("Shipments")
+                        .HasForeignKey("SenderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Caller");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.ShipmentCategory", b =>
@@ -151,6 +188,11 @@ namespace Szilveszter_Levente_Proiect.Migrations
             modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.Category", b =>
                 {
                     b.Navigation("ShipmentCategories");
+                });
+
+            modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.Sender", b =>
+                {
+                    b.Navigation("Shipments");
                 });
 
             modelBuilder.Entity("Szilveszter_Levente_Proiect.Models.Shipment", b =>

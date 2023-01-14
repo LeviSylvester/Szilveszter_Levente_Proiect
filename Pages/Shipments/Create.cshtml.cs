@@ -23,6 +23,7 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
         public IActionResult OnGet()
         {
             ViewData["CallerID"] = new SelectList(_context.Set<Caller>(), "ID", "CallerName");
+            ViewData["SenderID"] = new SelectList(_context.Set<Sender>(), "ID", "FullName");
 
             var shipment = new Shipment();
             shipment.ShipmentCategories = new List<ShipmentCategory>();
@@ -35,6 +36,7 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
         [BindProperty]
         public Shipment Shipment { get; set; }
 
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
             var newShipment = new Shipment();
@@ -52,7 +54,7 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
             }
 
             if (await TryUpdateModelAsync<Shipment>(newShipment, "Shipment",
-                i => i.Recipient, i => i.Sender,
+                i => i.Recipient, i => i.SenderID,
                 i => i.Price, i => i.BookingDateTime, i => i.CallerID))
             {
                 _context.Shipment.Add(newShipment);
@@ -61,21 +63,6 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
             }
             PopulateAssignedCategoryData(_context, newShipment);
             return Page();
-        }
-
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Shipment.Add(Shipment);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }
