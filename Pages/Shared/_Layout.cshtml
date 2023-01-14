@@ -4,11 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Courier Services</title>
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body class="MainBody" style="color: white">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -38,7 +37,7 @@
             @RenderBody()
         </main>
     </div>
-
+    @*
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - Szilveszter_Levente_Proiect - <a asp-area="" asp-page="/Privacy">Privacy</a>
@@ -48,6 +47,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

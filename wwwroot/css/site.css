@@ -13,12 +13,16 @@ html {
   min-height: 100%;
 }
 
-body {
+.MainBody {
     margin-bottom: 60px;
-    background-color: #333333; /* dark gray */
-    color: #FFFFFF; /* white text*/
+    background-color: #2b2f32; /* dark gray */
+    color: #FFFFFF !important; /* white text*/
     background-image: url("/images/bicycleCourierDarkGreyBackground.JPG");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto;
     background-position: center;
+}
+
+.container {
+    color: #FFFFFF
 }
