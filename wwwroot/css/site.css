@@ -20,7 +20,7 @@ html {
     background-image: url("/images/bicycleCourierDarkGreyBackground.JPG");
     background-repeat: no-repeat;
     background-size: auto;
-    background-position: center;
+    background-position: bottom;
 }
 
 .container {

@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Sender)
+                @Html.DisplayNameFor(model => model.Shipment[0].Sender.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].Recipient)
@@ -49,7 +49,14 @@
                 @Html.DisplayFor(modelItem => item.Caller.CallerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender)
+                @if (item.Sender != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Sender.FullName)
+                }
+                else
+                {
+                    @: Not available
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Recipient)

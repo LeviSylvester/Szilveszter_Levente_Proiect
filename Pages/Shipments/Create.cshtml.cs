@@ -37,31 +37,55 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
         public Shipment Shipment { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
+        //public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
+        //{
+        //    var newShipment = new Shipment();
+        //    if (selectedCategories != null)
+        //    {
+        //        newShipment.ShipmentCategories = new List<ShipmentCategory>();
+        //        foreach (var cat in selectedCategories)
+        //        {
+        //            var catToAdd = new ShipmentCategory
+        //            {
+        //                CategoryID = int.Parse(cat)
+        //            };
+        //            newShipment.ShipmentCategories.Add(catToAdd);
+        //        }
+        //    }
+        //
+        //    if (await TryUpdateModelAsync<Shipment>(newShipment, "Shipment",
+        //        i => i.Recipient, i => i.SenderID,
+        //        i => i.Price, i => i.BookingDateTime, i => i.CallerID))
+        //    {
+        //        _context.Shipment.Add(newShipment);
+        //        await _context.SaveChangesAsync();
+        //        
+        //    }
+        //    PopulateAssignedCategoryData(_context, newShipment);
+        //    return Page();
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAsync(Shipment shipment, string[] selectedCategories)
         {
-            var newShipment = new Shipment();
             if (selectedCategories != null)
             {
-                newShipment.ShipmentCategories = new List<ShipmentCategory>();
-                foreach (var cat in selectedCategories)
+                shipment.ShipmentCategories = new List<ShipmentCategory>();
+                foreach (var category in selectedCategories)
                 {
-                    var catToAdd = new ShipmentCategory
-                    {
-                        CategoryID = int.Parse(cat)
-                    };
-                    newShipment.ShipmentCategories.Add(catToAdd);
+                    var categoryToAdd = new ShipmentCategory { ShipmentID = shipment.ID, CategoryID = int.Parse(category) };
+                    shipment.ShipmentCategories.Add(categoryToAdd);
                 }
             }
-
-            if (await TryUpdateModelAsync<Shipment>(newShipment, "Shipment",
-                i => i.Recipient, i => i.SenderID,
-                i => i.Price, i => i.BookingDateTime, i => i.CallerID))
-            {
-                _context.Shipment.Add(newShipment);
+            //if (ModelState.IsValid)
+            //{
+                _context.Add(shipment);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-            PopulateAssignedCategoryData(_context, newShipment);
+                //return RedirectToAction(nameof(Index));
+            return RedirectToPage("./Index");
+            //}
+            PopulateAssignedCategoryData(_context, shipment);
             return Page();
         }
     }

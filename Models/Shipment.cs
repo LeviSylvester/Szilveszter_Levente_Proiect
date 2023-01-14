@@ -14,10 +14,6 @@ namespace Szilveszter_Levente_Proiect.Models
         [Display(Name = "Recipient Data")]
         public string Recipient { get; set; }
 
-        //[Required, StringLength(150, MinimumLength = 4)]
-        //[Display(Name = "Sender Data")]
-        //public string Sender { get; set; }
-
         public int SenderID { get; set; }
         public Sender Sender { get; set; }
 

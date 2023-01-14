@@ -29,8 +29,9 @@ namespace Szilveszter_Levente_Proiect.Pages.Shipments
 
             ShipmentD.Shipments = await _context.Shipment
                      .Include(s => s.Caller)
+                     .Include(s => s.Sender)
                      .Include(s => s.ShipmentCategories)
-                     .ThenInclude(s => s.Category)
+                        .ThenInclude(sc => sc.Category)
                      .AsNoTracking()
                      .OrderBy(s => s.Recipient)
                      .ToListAsync();
