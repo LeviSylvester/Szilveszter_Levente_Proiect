@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Szilveszter_Levente_Proiect.Migrations
 {
-    public partial class ShipmentCategories : Migration
+    public partial class SendersDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,13 +36,29 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sender",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sender", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shipment",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Recipient = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Recipient = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    SenderID = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     BookingDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CallerID = table.Column<int>(type: "int", nullable: false)
@@ -54,6 +70,12 @@ namespace Szilveszter_Levente_Proiect.Migrations
                         name: "FK_Shipment_Caller_CallerID",
                         column: x => x.CallerID,
                         principalTable: "Caller",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shipment_Sender_SenderID",
+                        column: x => x.SenderID,
+                        principalTable: "Sender",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -90,6 +112,11 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 column: "CallerID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Shipment_SenderID",
+                table: "Shipment",
+                column: "SenderID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShipmentCategory_CategoryID",
                 table: "ShipmentCategory",
                 column: "CategoryID");
@@ -99,6 +126,7 @@ namespace Szilveszter_Levente_Proiect.Migrations
                 table: "ShipmentCategory",
                 column: "ShipmentID");
         }
+
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -113,6 +141,9 @@ namespace Szilveszter_Levente_Proiect.Migrations
 
             migrationBuilder.DropTable(
                 name: "Caller");
+
+            migrationBuilder.DropTable(
+                name: "Sender");
         }
     }
 }

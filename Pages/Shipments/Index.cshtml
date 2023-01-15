@@ -1,8 +1,8 @@
-﻿@page "/"
+﻿@page "/{id:int?}"
 @model Szilveszter_Levente_Proiect.Pages.Shipments.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shipments";
 }
 
 <h1>Index</h1>
@@ -10,14 +10,20 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" style="color: white">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Recipient)
+                @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Sender)
+                @Html.DisplayNameFor(model => model.Shipment[0].Sender.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment[0].Recipient)
+            </th>            
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment[0].ShipmentCategories)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].Price)
@@ -25,30 +31,51 @@
             <th>
                 @Html.DisplayNameFor(model => model.Shipment[0].BookingDateTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shipment[0].Caller.CallerName)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Shipment) {
-        <tr>
+@foreach (var item in Model.ShipmentD.Shipments) 
+{
+
+    string selectedRow = "";
+            if (item.ID == Model.ShipmentID)
+            {
+                selectedRow = "table-success";
+            }
+
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Caller.CallerName)
+            </td>
+            <td>
+                @if (item.Sender != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Sender.FullName)
+                }
+                else
+                {
+                    @: Not available
+                }
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Recipient)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender)
+                @{
+                    foreach (var category in item.ShipmentCategories)
+                    {
+                        @category.Category.ID @: @category.Category.CategoryName <br />
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookingDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caller.CallerName)
-            </td>
+            </td>            
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
@@ -58,3 +85,4 @@
 }
     </tbody>
 </table>
+

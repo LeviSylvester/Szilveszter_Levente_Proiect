@@ -10,7 +10,7 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" style="color: white">
     <thead>
         <tr>
             <th>
@@ -22,7 +22,7 @@
     <tbody>
 @foreach (var item in Model.Category) {
         <tr>
-            <td>
+            <td style="color: white">
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
@@ -34,3 +34,4 @@
 }
     </tbody>
 </table>
+
